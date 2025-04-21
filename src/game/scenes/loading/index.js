@@ -1,17 +1,14 @@
 import { Scene } from 'phaser';
 import { DECKS } from './assets';
 
-const BAR_X = 79;
+const BAR_X = 59;
 const BAR_Y = 29;
 
 export class Preloader extends Scene {
     constructor() {
         super('Preloader');
     }
-
-    init() {
-
-    }
+    loaded = false
 
     preload() {
         //  Load the assets for the game - Replace with your own assets
@@ -53,6 +50,7 @@ export class Preloader extends Scene {
 
         this.createBar();
         this.postload();
+        this.initListener();
     }
 
     update() {
@@ -66,13 +64,11 @@ export class Preloader extends Scene {
         const originalBgW = bg.width;
         const originalBgH = bg.height;
         bg.setScale(Math.max(width / originalBgW, height / originalBgH));
-
         // === Loading Bar Background ===
         const barBg = this.add.image(0, 0, "ui-loading:bar-background")
         barBg.setOrigin(0)
             .setScale(Math.min((width * 0.75) / barBg.width, 1));
         barBg.setPosition(width / 2 - barBg.displayWidth / 2, height / 2 - barBg.displayHeight / 2);
-
         // === Foreground Bar ===
         const bar = this.add.image(0, 0, "ui-loading:bar")
             .setOrigin(0)
@@ -95,6 +91,12 @@ export class Preloader extends Scene {
             ""
         ).setOrigin(0.5).setFontSize(18).setName("title");
 
+        const start = this.add.text(
+            bar.x + bar.displayWidth / 2,
+            bar.y + bar.displayHeight / 2 + 80,
+            "Press SPACE bar to start"
+        ).setFontSize(36).setOrigin(0.5)
+
         // === Responsive Resize Handling ===
         this.scale.on('resize', ({ width, height }) => {
             bg.setPosition(width / 2, height / 2);
@@ -112,11 +114,21 @@ export class Preloader extends Scene {
 
                 maskGfx.clear();
                 maskGfx.fillRect(bar.x, bar.y, bar.displayWidth, bar.displayHeight);
-
+                start.setPosition(bar.x + bar.displayWidth / 2, bar.y + bar.displayHeight / 2 + 80);
                 title.setPosition(bar.x + bar.displayWidth / 2, bar.y + bar.displayHeight / 2);
+                start.setVisible(this.loaded ? true : false)
             }
         });
 
+
+    }
+
+    initListener() {
+        this.input.keyboard.on('keydown-SPACE', () => {
+            if(this.loaded) {
+                this.scene.start('MainMenu');
+            }
+        });
     }
 
     onLoaderProgress(progress) {
@@ -134,23 +146,6 @@ export class Preloader extends Scene {
     }
 
     async onLoaderComplete() {
-        this.userData = await this.registry.get("userData")
-        if (!this.userData) {
-            // this.userData = await getUserData() as Miner
-            this.userData = {
-                userAddress: "bc1psatwx5m9ltvmz77wkgnw4e64qakxwd008us6gfwy3d97kc6f05uqead2p0",
-                userTier: 3,
-                loyalty: 5,
-                crystalReward: 2127.0638,
-                xpLevel: 18,
-                discordImg: "https://cdn.discordapp.com/avatars/469547386872528919/ebeadfb8d1c697d194f2ee4133d8c901"
-            }
-            this.registry.set("userData", this.userData)
-        }
-        console.log("userData", this.userData)
-        // this.scene.start("room", { ...roomConfigs[`house${this.userData.userTier}`], reborn: true });
-        // this.scene.start("MainMenu");
-        // Dev only
-        // this.scene.start("cave", caveConfigs.level1);
+        this.loaded = true
     }
 }

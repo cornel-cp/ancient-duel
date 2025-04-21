@@ -49,7 +49,7 @@ const config = {
                     // This must be the key/name of your loading scene
                     loadingSceneKey: 'LoadingScene',
                     // This must be the key/name of your game (gameplay) scene
-                    gameplaySceneKey: 'Preloader',
+                    gameplaySceneKey: 'MainMenu',
                     // This will always request a commercialBreak when gameplay starts,
                     // set to false to disable this behaviour (recommended to have true,
                     // see Poki SDK docs for more details).
