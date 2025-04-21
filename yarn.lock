@@ -167,6 +167,13 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
+"@poki/phaser-3@^0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@poki/phaser-3/-/phaser-3-0.0.5.tgz#d41ad7241a7a026f738228c2ca4e9ffea7d2f970"
+  integrity sha512-VqUecuPcTsQ7KB8gnQ5KBl+Ar+eudhXC3WAHXOMkzX/ZsJsygt7kljUgbXyCh/LcGH8S+hR9HApuB+keRAPjxw==
+  dependencies:
+    phaser "^3.55.2"
+
 "@rollup/rollup-android-arm-eabi@4.40.0":
   version "4.40.0"
   resolved "https://registry.yarnpkg.com/@rollup/rollup-android-arm-eabi/-/rollup-android-arm-eabi-4.40.0.tgz#d964ee8ce4d18acf9358f96adc408689b6e27fe3"
@@ -338,7 +345,7 @@ nanoid@^3.3.8:
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.3.11.tgz#4f4f112cefbe303202f2199838128936266d185b"
   integrity sha512-N8SpfPUnUp1bK+PMYW8qSWdl9U+wwNWI4QKxOYDy9JAro3WMX7p2OeVRF9v+347pnakNevPmiHhNmZ2HbFA76w==
 
-phaser@^3.88.2:
+phaser@^3.55.2, phaser@^3.88.2:
   version "3.88.2"
   resolved "https://registry.yarnpkg.com/phaser/-/phaser-3.88.2.tgz#f9bf48560efc16e23935a6ef4d20b625a51de013"
   integrity sha512-UBgd2sAFuRJbF2xKaQ5jpMWB8oETncChLnymLGHcrnT53vaqiGrQWbUKUDBawKLm24sghjKo4Bf+/xfv8espZQ==
