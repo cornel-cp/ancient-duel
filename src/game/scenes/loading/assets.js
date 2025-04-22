@@ -36,3 +36,20 @@ export const DECKS = [
         ]
     }
 ]
+
+export const ASEPRITE = [
+    {
+        path:"ui/menu",
+        name: "menuBtn",
+        image: "btn_menu.png",
+        json: "btn_menu.json"
+      },
+]
+
+export const ASSETS = [
+    {
+        path:"ui/menu",
+        name:"menu:background",
+        image:"backgorund.png",
+    }
+]

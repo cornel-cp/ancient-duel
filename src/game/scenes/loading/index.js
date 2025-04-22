@@ -1,5 +1,5 @@
 import { Scene } from 'phaser';
-import { DECKS } from './assets';
+import { ASEPRITE, ASSETS, DECKS } from './assets';
 
 const BAR_X = 59;
 const BAR_Y = 29;
@@ -35,6 +35,14 @@ export class Preloader extends Scene {
             })
         })
 
+        ASEPRITE.forEach((item) => {
+            this.load.aseprite(item.name, `${item.path}/${item.image}`, `${item.path}/${item.json}`)
+        })
+
+        ASSETS.forEach((item) => {
+            this.load.image(item.name, `${item.path}/${item.image}`)
+        })
+
         this.load.start();
     }
 
@@ -59,10 +67,16 @@ export class Preloader extends Scene {
 
     createBar() {
         const { width, height } = this.scale;
-        // === Background (CSS background-size: cover style) ===
+        // === Background ===
         const bg = this.add.image(width / 2, height / 2, 'ui-loading:background').setOrigin(0.5);
         const originalBgW = bg.width;
         const originalBgH = bg.height;
+        const fx = bg.preFX.addBlur();
+        this.tweens.add({
+            targets: fx,
+            strength: 0,
+            duration: 2000,
+        });
         bg.setScale(Math.max(width / originalBgW, height / originalBgH));
         // === Loading Bar Background ===
         const barBg = this.add.image(0, 0, "ui-loading:bar-background")
