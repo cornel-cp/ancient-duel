@@ -17,7 +17,7 @@ export class MainMenu extends Scene {
         bg.setScale(Math.max(width / originalBgW, height / originalBgH));
         // Create individual buttons
         const playButton = new MenuButton(this, 0, 0, 'Play', () => {
-            this.scene.start('GameScene');
+            this.scene.start('DeckSelect');
         });
 
         const optionsButton = new MenuButton(this, 0, 150, 'Options', () => {

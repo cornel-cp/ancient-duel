@@ -5,6 +5,7 @@ import { AUTO, Game } from 'phaser';
 import { PokiPlugin } from '@poki/phaser-3'
 import { Preloader } from './scenes/loading';
 import { MainMenu } from './scenes/menu';
+import DeckSelect from './scenes/selectDeck';
 //  Find out more information about the Game Config at:
 //  https://docs.phaser.io/api-documentation/typedef/types-core#gameconfig
 window.sizeChanged = () => {
@@ -15,7 +16,6 @@ window.sizeChanged = () => {
                 'style',
                 `display: block; width: ${window.innerWidth}px; height: ${window.innerHeight}px;`,
             );
-            console.log(window.innerWidth)
         }, 100);
     }
 };
@@ -32,7 +32,8 @@ const config = {
         Preloader,
         MainMenu,
         MainGame,
-        GameOver
+        GameOver,
+        DeckSelect
     ],
     callbacks: {
         postBoot: () => {
