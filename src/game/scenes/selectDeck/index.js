@@ -1,17 +1,19 @@
 import Phaser from 'phaser';
 import { DeckCard } from '../../components/card/deck';
+import { BaseScene } from '../base';
 
-export default class DeckSelect extends Phaser.Scene {
+export default class DeckSelect extends BaseScene {
     constructor() {
-        super('DeckSelect');
+        super({
+            name: 'DeckSelect',
+            background: 'select:background'
+        });
     }
 
-    preload() {
-        // Load card/deck images
-        this.load.image('card', 'path/to/card.png'); // Use one image for now
-    }
 
     create() {
+        const { width, height } = this.scale;
+
         // const decks = ['Monsters', 'Skellige', 'Nilfgaard', 'Northern Realms', 'Scoia\'tael', 'Extra Deck 1', 'Extra Deck 2'];
         // const cards = Array.from({ length: 40 });
 
@@ -60,16 +62,22 @@ export default class DeckSelect extends Phaser.Scene {
         // });
 
         let previouseCard = null;
+
+        const romeDeck = new DeckCard(this, 0, this.scale.height - this.scale.height/2, "romedeck", {
+            titleTexture: "romedeck_title",
+            characterTexture: "rome_general"
+        })
+        const greekDeck = new DeckCard(this, 600 , this.scale.height - this.scale.height/2, "greecedeck", {
+            titleTexture: "greecedeck_title",
+            characterTexture: "greece_general"
+        })
         const planes = [
-            new DeckCard(this, 200, this.scale.height - 300, "romedeck", {
-                titleTexture: "romedeck_title",
-                characterTexture: "rome_general"
-            }),
-            new DeckCard(this, 600, this.scale.height - 300, "greecedeck", {
-                titleTexture: "greecedeck_title",
-                characterTexture: "greece_general"
-            })
+            romeDeck, greekDeck
         ];
+
+        this.centerContainer = this.add.container(width / 2, height / 2 - 150, [
+            romeDeck, greekDeck
+        ]).setDepth(1);
 
         this.input.on(Phaser.Input.Events.POINTER_MOVE, (pointer) => {
             const { x, y } = pointer;
@@ -89,5 +97,6 @@ export default class DeckSelect extends Phaser.Scene {
                 }
             }
         });
+        super.create()
     }
 }

@@ -51,5 +51,10 @@ export const ASSETS = [
         path:"ui/menu",
         name:"menu:background",
         image:"backgorund.png",
+    },
+    {
+        path:"ui/selectdeck",
+        name:"select:background",
+        image:"background.jpg",
     }
 ]

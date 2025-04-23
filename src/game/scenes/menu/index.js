@@ -1,51 +1,57 @@
-import { Scene } from "phaser";
 import { MenuButton } from "../../components/buttons/menubutton";
+import { BaseScene } from "../base";
 
-export class MainMenu extends Scene {
+export class MainMenu extends BaseScene {
 
-    buttonContainer
+
+    buttons
 
     constructor() {
-        super('MainMenu');
+        super({
+            name: 'MainMenu',
+            background: 'menu:background'
+        });
     }
 
     create() {
         const { width, height } = this.scale;
-        const bg = this.add.image(width / 2, height / 2, 'menu:background').setOrigin(0.5);
-        const originalBgW = bg.width;
-        const originalBgH = bg.height;
-        bg.setScale(Math.max(width / originalBgW, height / originalBgH));
+        const spacing = width < 1024 ? 80 : 150;
         // Create individual buttons
         const playButton = new MenuButton(this, 0, 0, 'Play', () => {
             this.scene.start('DeckSelect');
         });
 
-        const optionsButton = new MenuButton(this, 0, 150, 'Options', () => {
+        const optionsButton = new MenuButton(this, 0, 0, 'Options', () => {
             console.log('Options clicked');
         });
 
-        const helpButton = new MenuButton(this, 0, 300, 'Help', () => {
+        const helpButton = new MenuButton(this, 0, 0, 'Help', () => {
             console.log('Help clicked');
         });
+        this.buttons = [playButton, optionsButton, helpButton]
 
-        // Group them into a container (stacked vertically, centered around center)
-        this.buttonContainer = this.add.container(width / 2, height / 2 - 150, [
-            playButton,
-            optionsButton,
-            helpButton
-        ]);
-
-        this.scale.on('resize', ({ width, height }) => {
-            bg.setPosition(width / 2, height / 2);
-            bg.setScale(Math.max(width / originalBgW, height / originalBgH));
+        this.buttons.forEach((btn, index) => {
+            btn.y = index * spacing;
         });
-        
-        // Listen for resize
-        this.scale.on('resize', this.resize, this);
+        // Group them into a container (stacked vertically, centered around center)
+        this.centerContainer = this.add.container(
+            this.scale.width / 2,
+            this.scale.height / 2 - (spacing * (this.buttons.length - 1)) / 2,
+            this.buttons
+        ).setDepth(1);
+        super.create()
     }
 
     resize(gameSize) {
-        const { width, height } = gameSize;
-        this.buttonContainer.setPosition(width / 2, height / 2 - 150);
+        const spacing = gameSize.width < 1024 ? 80 : 150;
+
+        this.buttons.forEach((btn, i) => {
+            btn.y = i * spacing;
+        });
+
+        this.centerContainer.setPosition(
+            gameSize.width / 2,
+            gameSize.height / 2 - (spacing * (this.buttons.length - 1)) / 2
+        );
     }
 }

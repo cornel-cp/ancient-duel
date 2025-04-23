@@ -2,6 +2,10 @@
 import Phaser from 'phaser';
 
 export class MenuButton extends Phaser.GameObjects.Container {
+
+  buttonSprite
+  label
+
   constructor(
     scene,
     x,
@@ -12,34 +16,59 @@ export class MenuButton extends Phaser.GameObjects.Container {
     super(scene, x, y);
     scene.add.existing(this);
 
-    const buttonSprite = scene.add.sprite(0, 0, 'menuBtn', 'default').setInteractive({ useHandCursor: true });
+    const { width } = scene.scale;
+    const isMobile = width < 1024;
 
-    const label = scene.add.text(0, 0, text, {
-      fontFamily: 'Arial',
-      fontSize: '32px',
-      color: '#ffffff',
-      stroke: '#000000',
-      strokeThickness: 4,
-    }).setOrigin(0.5);
+    const fontSize = isMobile ? '18px' : '32px';
+    const scaleFactor = isMobile ? 0.6 : 1;
 
-    this.add([buttonSprite, label]);
+    this.buttonSprite = scene.add
+      .sprite(0, 0, 'menuBtn', 'default')
+      .setInteractive({ useHandCursor: true })
+      .setScale(scaleFactor);
+
+    this.label = scene.add
+      .text(0, 0, text, {
+        fontFamily: 'Arial',
+        fontSize,
+        color: '#ffffff',
+        stroke: '#000000',
+        strokeThickness: 4,
+      })
+      .setOrigin(0.5);
+
+    this.add([this.buttonSprite, this.label]);
 
     // Interactivity
-    buttonSprite.on('pointerover', () => {
-      buttonSprite.setFrame('hover');
+    this.buttonSprite.on('pointerover', () => {
+      this.buttonSprite.setFrame('hover');
     });
 
-    buttonSprite.on('pointerout', () => {
-      buttonSprite.setFrame('default');
+    this.buttonSprite.on('pointerout', () => {
+      this.buttonSprite.setFrame('default');
     });
 
-    buttonSprite.on('pointerdown', () => {
-      buttonSprite.setFrame('press');
+    this.buttonSprite.on('pointerdown', () => {
+      this.buttonSprite.setFrame('press');
     });
 
-    buttonSprite.on('pointerup', () => {
-      buttonSprite.setFrame('hover');
+    this.buttonSprite.on('pointerup', () => {
+      this.buttonSprite.setFrame('hover');
       onClick();
     });
+
+    // Responsive resize
+    scene.scale.on('resize', (gameSize) => {
+      this.handleResize(gameSize.width);
+    });
+  }
+
+  handleResize(width) {
+    const isMobile = width < 1024;
+    const fontSize = isMobile ? '18px' : '32px';
+    const scaleFactor = isMobile ? 0.6 : 1;
+
+    this.label.setFontSize(fontSize);
+    this.buttonSprite.setScale(scaleFactor);
   }
 }

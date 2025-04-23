@@ -9,6 +9,9 @@ export class Preloader extends Scene {
         super('Preloader');
     }
     loaded = false
+    // === Background blue controller ===
+    fx = null
+
 
     preload() {
         //  Load the assets for the game - Replace with your own assets
@@ -68,15 +71,15 @@ export class Preloader extends Scene {
     createBar() {
         const { width, height } = this.scale;
         // === Background ===
-        const bg = this.add.image(width / 2, height / 2, 'ui-loading:background').setOrigin(0.5);
+        const bg = this.add.image(width / 2, height / 2, 'ui-loading:background').setOrigin(0.5).setName("bg");
         const originalBgW = bg.width;
         const originalBgH = bg.height;
-        const fx = bg.preFX.addBlur();
-        this.tweens.add({
-            targets: fx,
-            strength: 0,
-            duration: 2000,
-        });
+        this.fx = bg.preFX.addBlur();
+        // this.tweens.add({
+        //     targets: fx,
+        //     strength: 0,
+        //     duration: 3000,
+        // });
         bg.setScale(Math.max(width / originalBgW, height / originalBgH));
         // === Loading Bar Background ===
         const barBg = this.add.image(0, 0, "ui-loading:bar-background")
@@ -151,6 +154,7 @@ export class Preloader extends Scene {
         const mask = this.children.getByName("mask");
         mask.clear();
         mask.fillRect(bar.x, bar.y, progress * bar.displayWidth, bar.height);
+        this.fx.strength = 1 - progress;
     }
 
     onLoaderFileProgress(file, progress) {

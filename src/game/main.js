@@ -1,13 +1,12 @@
 import { Boot } from './scenes/Boot';
 import { GameOver } from './scenes/GameOver';
 import { Game as MainGame } from './scenes/Game';
-import { AUTO, Game } from 'phaser';
 import { PokiPlugin } from '@poki/phaser-3'
 import { Preloader } from './scenes/loading';
 import { MainMenu } from './scenes/menu';
 import DeckSelect from './scenes/selectDeck';
-//  Find out more information about the Game Config at:
-//  https://docs.phaser.io/api-documentation/typedef/types-core#gameconfig
+import { AUTO, Game, Scale, Types, WEBGL } from 'phaser';
+
 window.sizeChanged = () => {
     if (window.game.isBooted) {
         setTimeout(() => {
@@ -27,6 +26,17 @@ const config = {
     height:  window.innerHeight,
     parent: 'game-container',
     backgroundColor: '#028af8',
+    physics: {
+        default: 'arcade',
+        arcade: {
+            debug: true,
+        },
+    },
+    scale: {
+        mode: Scale.ScaleModes.NONE,
+        width: window.innerWidth,
+        height: window.innerHeight,
+    },
     scene: [
         Boot,
         Preloader,
