@@ -5,7 +5,7 @@ export class MenuButton extends Phaser.GameObjects.Container {
 
   buttonSprite
   label
-
+  resizeCallback
   constructor(
     scene,
     x,
@@ -57,10 +57,11 @@ export class MenuButton extends Phaser.GameObjects.Container {
       onClick();
     });
 
-    // Responsive resize
-    scene.scale.on('resize', (gameSize) => {
+    this.resizeCallback = (gameSize) => {
       this.handleResize(gameSize.width);
-    });
+    };
+
+    scene.scale.on('resize', this.resizeCallback);
   }
 
   handleResize(width) {
@@ -70,5 +71,11 @@ export class MenuButton extends Phaser.GameObjects.Container {
 
     this.label.setFontSize(fontSize);
     this.buttonSprite.setScale(scaleFactor);
+  }
+
+  
+  destroy(fromScene) {
+    this.scene.scale.off('resize', this.resizeCallback);
+    super.destroy(fromScene);
   }
 }

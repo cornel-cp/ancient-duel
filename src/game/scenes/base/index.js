@@ -24,12 +24,15 @@ export class BaseScene extends Scene {
         });
         // Listen for resize
         this.scale.on('resize', this.resize, this);
+        this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
+            this.scale.off('resize', this.resize);
+        });
     }
 
     resize(gameSize) {
         const { width, height } = gameSize;
         if (this.centerContainer)
             this.centerContainer.setPosition(width / 2, height / 2 - 150);
-        
+
     }
 }
