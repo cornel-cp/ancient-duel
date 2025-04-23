@@ -1,3 +1,45 @@
+export const getDecks = () => {
+    return [
+        {
+            name:"romedeck",
+            texture:"romedeck",
+            character:"rome_general",
+            title:"romedeck_title",
+        },
+        {
+            name:"greecedeck",
+            texture:"greecedeck",
+            character:"greece_general",
+            title:"greecedeck_title",
+        },
+        {
+            name:"romedeck",
+            texture:"romedeck",
+            character:"rome_general",
+            title:"romedeck_title",
+        },
+        {
+            name:"greecedeck",
+            texture:"greecedeck",
+            character:"greece_general",
+            title:"greecedeck_title",
+        },
+        {
+            name:"romedeck",
+            texture:"romedeck",
+            character:"rome_general",
+            title:"romedeck_title",
+        },
+        {
+            name:"greecedeck",
+            texture:"greecedeck",
+            character:"greece_general",
+            title:"greecedeck_title",
+        }
+    ]
+}
+
+
 export const getCards = () => {
     // type: 1 = mele, 2 = ranged, 3 = hero, 4 = special
     return [

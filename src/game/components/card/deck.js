@@ -1,22 +1,35 @@
-export class DeckCard extends Phaser.GameObjects.Plane
-{
+export class DeckCard extends Phaser.GameObjects.Plane {
     title;
     character;
-    constructor (scene, x, y, texture, options)
-    {
-        super(scene, x, y, texture);
+    resizeCallback;
+    deck
 
+    constructor(scene, x, y, deck) {
+        super(scene, x, y, deck.texture);
+        this.deck = deck;
         this.scene.add.existing(this);
-
-        // Character
-        this.character = scene.add.image(x, y, options.characterTexture).setAlpha(0);
+        this.character = scene.add.image(this.x, this.y, this.deck.character);
         // Title
-        this.title = scene.add.image(x, y + 100, options.titleTexture);
-
+        this.title = scene.add.image(this.x, this.y + this.scale.width > 1024 ? 200 : 100, this.deck.title);
+        this.handleResize({ width: scene.scale.width, height: scene.scale.height });
+        this.loadDeck(deck);
+        this.resizeCallback = (gameSize) => {
+            this.handleResize(gameSize);
+        };
+        scene.scale.on('resize', this.resizeCallback);
     }
 
-    moveCard ()
-    {
+    loadDeck(deck) {
+        this.deck = deck;
+        console.log(deck)
+        this.setTexture(deck.texture);
+        // Character
+        this.character.setTexture(deck.character);
+        // Title
+        this.title.setTexture(deck.title);
+    }
+
+    moveCard() {
         this.scene.add.tween({
             targets: this,
             duration: 300,
@@ -50,8 +63,7 @@ export class DeckCard extends Phaser.GameObjects.Plane
         });
     }
 
-    restoreMove ()
-    {
+    restoreMove() {
         this.scene.add.tween({
             targets: this,
             duration: 300,
@@ -84,5 +96,17 @@ export class DeckCard extends Phaser.GameObjects.Plane
                 })
             }
         });
+    }
+
+    handleResize(gameSize) {
+        const { width, height } = gameSize;
+        this.setY(height / 2);
+        this.setScale(width > 1024 ? 1 : 0.5);
+        this.character.setScale(width > 1024 ? 1 : 0.5);
+        this.character.setPosition(this.x, this.y);
+        this.title.setX(width / 2)
+        console.log(this.y , this.character.height/2 , width > 1024 ? 200 : 100)
+        this.title.setScale(width > 1024 ? 1.5 : 1);
+        // this.character.setSize(width / 4, width / 4 * 4 / 3);
     }
 }

@@ -1,15 +1,19 @@
 import Phaser from 'phaser';
 import { DeckCard } from '../../components/card/deck';
 import { BaseScene } from '../base';
+import { getDecks } from '../../../api';
 
 export default class DeckSelect extends BaseScene {
 
     decks = []
     deckContainer
-    currentIndex
+    currentIndex = 0
     btnLeft
     btnRight
 
+    deckCard
+
+    decks = []
 
     constructor() {
         super({
@@ -18,57 +22,38 @@ export default class DeckSelect extends BaseScene {
         });
     }
 
+    preload() {
+        this.decks = getDecks()
+        console.log("decks", this.decks)
+    }
+
 
     create() {
         const { width, height } = this.scale;
 
         this.deckContainer = this.add.container(width / 2, height / 2);
 
-        this.createDeckCards();
+        // this.createDeckCards();
         this.createSliderControls();
-        this.resize();
-
-        this.input.on('pointerup', () => {
-            this.resize();
-        });
-
 
         let previouseCard = null;
-
-        // this.input.on(Phaser.Input.Events.POINTER_MOVE, (pointer) => {
-        //     const { x, y } = pointer;
-        //     const card = planes.find(card => card.hasFaceAt(x, y));
-
-        //     if (card) {
-        //         if (!previouseCard && previouseCard !== card) {
-        //             card.moveCard();
-        //             previouseCard = card;
-
-        //         }
-        //     } else {
-        //         if (previouseCard) {
-        //             const card = previouseCard;
-        //             card.restoreMove();
-        //             previouseCard = null;
-        //         }
-        //     }
-        // });
+        this.deckCard = new DeckCard(this, this.scale.width / 2, this.scale.height - this.scale.height / 2, this.decks[0])
+        this.input.on(Phaser.Input.Events.POINTER_MOVE, (pointer) => {
+            const { x, y } = pointer;
+            if (this.deckCard.hasFaceAt(x, y)) {
+                if (previouseCard !== this.deckCard) {
+                    this.deckCard.moveCard();
+                    previouseCard = this.deckCard;
+                }
+            } else {
+                if (previouseCard) {
+                    const card = previouseCard;
+                    card.restoreMove();
+                    previouseCard = null;
+                }
+            }
+        });
         super.create()
-    }
-
-    createDeckCards() {
-        // Create mock decks for now
-        for (let i = 0; i < 12; i++) {
-            const romeDeck = new DeckCard(this, 0, this.scale.height - this.scale.height / 2, "romedeck", {
-                titleTexture: "romedeck_title",
-                characterTexture: "rome_general"
-            })
-            const greekDeck = new DeckCard(this, 600, this.scale.height - this.scale.height / 2, "greecedeck", {
-                titleTexture: "greecedeck_title",
-                characterTexture: "greece_general"
-            })
-            this.decks.push(i % 2 === 1 ? romeDeck : greekDeck);
-        }
     }
 
     createSliderControls() {
@@ -78,22 +63,22 @@ export default class DeckSelect extends BaseScene {
             .setInteractive()
             .on('pointerup', () => {
                 if (this.currentIndex > 0) {
+                    console.log("left")
                     this.currentIndex--;
-                    this.updateDeckDisplay();
+                    this.deckCard.loadDeck(this.decks[this.currentIndex])
                 }
             });
 
         this.rightButton = this.add.image(width - 60, height / 2, 'rightArrow')
             .setInteractive()
             .on('pointerup', () => {
-                const maxIndex = this.decks.length - this.getVisibleDeckCount();
+                const maxIndex = this.decks.length - 1;
+                console.log("right", this.currentIndex, maxIndex)
                 if (this.currentIndex < maxIndex) {
                     this.currentIndex++;
-                    this.updateDeckDisplay();
+                    this.deckCard.loadDeck(this.decks[this.currentIndex])
                 }
             });
-
-
     }
 
     getVisibleDeckCount() {
@@ -104,20 +89,11 @@ export default class DeckSelect extends BaseScene {
     }
 
     resize(gameSize) {
-        const visibleCount = this.getVisibleDeckCount();
-        const spacing = 200;
-        const startX = -(spacing * (visibleCount - 1)) / 2;
-
-        this.deckContainer.removeAll(true);
-
-        for (let i = 0; i < visibleCount; i++) {
-            const index = this.currentIndex + i;
-            if (index < this.decks.length) {
-                const deck = this.decks[index];
-                deck.x = startX + i * spacing;
-                deck.y = 0;
-                this.deckContainer.add(deck);
-            }
+        if (this.deckCard && gameSize)
+            this.deckCard.setPosition(gameSize.width / 2, gameSize.height / 2)
+        if (gameSize) {
+            this.leftButton.setPosition(60, gameSize.height / 2);
+            this.rightButton.setPosition(gameSize.width - 60, gameSize.height / 2);
         }
     }
 }
