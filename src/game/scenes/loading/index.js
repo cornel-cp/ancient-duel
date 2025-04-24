@@ -31,9 +31,7 @@ export class Preloader extends Scene {
         this.load.baseURL = 'assets/images/';
 
         DECKS.forEach((item) => {
-            console.log(item)
             item.cards.forEach((card) => {
-                console.log(card)
                 this.load.image(card.key, `cards/${item.path}/${card.url}`);
             })
         })
@@ -149,7 +147,6 @@ export class Preloader extends Scene {
     }
 
     onLoaderProgress(progress) {
-        console.log(progress)
         const bar = this.children.getByName("bar");
         const mask = this.children.getByName("mask");
         mask.clear();

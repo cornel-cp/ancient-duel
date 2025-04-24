@@ -2,6 +2,8 @@ import Phaser from 'phaser';
 import { DeckCard } from '../../components/card/deck';
 import { BaseScene } from '../base';
 import { getDecks } from '../../../api';
+import { MenuButton } from '../../components/buttons/menubutton';
+import { Button } from '../../components/buttons/button';
 
 export default class DeckSelect extends BaseScene {
 
@@ -14,6 +16,7 @@ export default class DeckSelect extends BaseScene {
     deckCard
 
     decks = []
+    btnStart
 
     constructor() {
         super({
@@ -24,7 +27,6 @@ export default class DeckSelect extends BaseScene {
 
     preload() {
         this.decks = getDecks()
-        console.log("decks", this.decks)
     }
 
 
@@ -53,32 +55,30 @@ export default class DeckSelect extends BaseScene {
                 }
             }
         });
+        this.btnStart = new MenuButton(this, this.scale.width - (this.scale.width > 1024 ? 200 : 100), this.scale.height - 60, 'Start', () => {
+            console.log('Help clicked');
+        }).setScale(0.4);
         super.create()
     }
 
     createSliderControls() {
         const { width, height } = this.scale;
 
-        this.leftButton = this.add.image(60, height / 2, 'leftArrow')
-            .setInteractive()
-            .on('pointerup', () => {
-                if (this.currentIndex > 0) {
-                    console.log("left")
-                    this.currentIndex--;
-                    this.deckCard.loadDeck(this.decks[this.currentIndex])
-                }
-            });
+        this.leftButton = new Button(this, 60, height / 2, 'button', "left", () => {
+            const maxIndex = this.decks.length - 1;
+            if (this.currentIndex < maxIndex) {
+                this.currentIndex++;
+                this.deckCard.loadDeck(this.decks[this.currentIndex])
+            }
+        })
 
-        this.rightButton = this.add.image(width - 60, height / 2, 'rightArrow')
-            .setInteractive()
-            .on('pointerup', () => {
-                const maxIndex = this.decks.length - 1;
-                console.log("right", this.currentIndex, maxIndex)
-                if (this.currentIndex < maxIndex) {
-                    this.currentIndex++;
-                    this.deckCard.loadDeck(this.decks[this.currentIndex])
-                }
-            });
+        this.rightButton = new Button(this, width - 60, height / 2, 'button', "right", () => {
+            const maxIndex = this.decks.length - 1;
+            if (this.currentIndex < maxIndex) {
+                this.currentIndex++;
+                this.deckCard.loadDeck(this.decks[this.currentIndex])
+            }
+        });
     }
 
     getVisibleDeckCount() {
@@ -94,6 +94,7 @@ export default class DeckSelect extends BaseScene {
         if (gameSize) {
             this.leftButton.setPosition(60, gameSize.height / 2);
             this.rightButton.setPosition(gameSize.width - 60, gameSize.height / 2);
+            this.btnStart.setPosition(gameSize.width - (gameSize.width > 1024 ? 200 : 100), gameSize.height - 60);
         }
     }
 }

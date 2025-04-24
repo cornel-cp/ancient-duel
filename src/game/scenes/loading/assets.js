@@ -1,7 +1,7 @@
 export const DECKS = [
     {
-        name:"Rome",
-        path:"Rome/",
+        name: "Rome",
+        path: "Rome/",
         cards: [
             {
                 key: "romedeck",
@@ -18,8 +18,8 @@ export const DECKS = [
         ]
     },
     {
-        name:"Greece",
-        path:"Greece/",
+        name: "Greece",
+        path: "Greece/",
         cards: [
             {
                 key: "greecedeck",
@@ -39,22 +39,28 @@ export const DECKS = [
 
 export const ASEPRITE = [
     {
-        path:"ui/menu",
+        path: "ui/menu",
         name: "menuBtn",
         image: "btn_menu.png",
         json: "btn_menu.json"
-      },
+    },
+    {
+        path: "ui",
+        name: "button",
+        image: "button.png",
+        json: "button.json"
+    },
 ]
 
 export const ASSETS = [
     {
-        path:"ui/menu",
-        name:"menu:background",
-        image:"backgorund.png",
+        path: "ui/menu",
+        name: "menu:background",
+        image: "backgorund.png",
     },
     {
-        path:"ui/selectdeck",
-        name:"select:background",
-        image:"background.jpg",
+        path: "ui/selectdeck",
+        name: "select:background",
+        image: "background.jpg",
     }
 ]

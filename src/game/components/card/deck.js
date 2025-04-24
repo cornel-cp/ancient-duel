@@ -21,7 +21,6 @@ export class DeckCard extends Phaser.GameObjects.Plane {
 
     loadDeck(deck) {
         this.deck = deck;
-        console.log(deck)
         this.setTexture(deck.texture);
         // Character
         this.character.setTexture(deck.character);
@@ -105,7 +104,6 @@ export class DeckCard extends Phaser.GameObjects.Plane {
         this.character.setScale(width > 1024 ? 1 : 0.5);
         this.character.setPosition(this.x, this.y);
         this.title.setX(width / 2)
-        console.log(this.y , this.character.height/2 , width > 1024 ? 200 : 100)
         this.title.setScale(width > 1024 ? 1.5 : 1);
         // this.character.setSize(width / 4, width / 4 * 4 / 3);
     }

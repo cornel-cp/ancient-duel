@@ -1,0 +1,37 @@
+{ 
+  "frames": {
+   "left": {
+    "frame": { "x": 0, "y": 0, "w": 88, "h": 123 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 88, "h": 123 },
+    "sourceSize": { "w": 88, "h": 123 },
+    "duration": 100
+   },
+   "right": {
+    "frame": { "x": 88, "y": 0, "w": 88, "h": 123 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 88, "h": 123 },
+    "sourceSize": { "w": 88, "h": 123 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.13-x64",
+  "image": "button.png",
+  "format": "RGBA8888",
+  "size": { "w": 176, "h": 123 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "left", "from": 0, "to": 0, "direction": "forward", "color": "#000000ff" },
+   { "name": "right", "from": 1, "to": 1, "direction": "forward", "color": "#000000ff" }
+  ],
+  "layers": [
+   { "name": "Layer", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}
