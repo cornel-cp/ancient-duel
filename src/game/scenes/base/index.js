@@ -5,7 +5,6 @@ export class BaseScene extends Scene {
     centerContainer
     config
 
-
     constructor(config) {
         super(config.name);
         this.config = config
@@ -33,6 +32,5 @@ export class BaseScene extends Scene {
         const { width, height } = gameSize;
         if (this.centerContainer)
             this.centerContainer.setPosition(width / 2, height / 2 - 150);
-
     }
 }

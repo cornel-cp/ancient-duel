@@ -6,7 +6,8 @@ import { Preloader } from './scenes/loading';
 import { MainMenu } from './scenes/menu';
 import DeckSelect from './scenes/selectDeck';
 import { AUTO, Game, Scale, Types, WEBGL } from 'phaser';
-
+import { SelectCard } from './scenes/selectCard';
+import ScrollerPlugin from '../../plugins/scroller-plugin.js';
 window.sizeChanged = () => {
     if (window.game.isBooted) {
         setTimeout(() => {
@@ -33,9 +34,10 @@ const config = {
         },
     },
     scale: {
-        mode: Scale.ScaleModes.NONE,
+        mode: Phaser.Scale.FIT,
         width: window.innerWidth,
         height: window.innerHeight,
+        // autoCenter: Phaser.Scale.CENTER_BOTH
     },
     scene: [
         Boot,
@@ -43,7 +45,8 @@ const config = {
         MainMenu,
         MainGame,
         GameOver,
-        DeckSelect
+        DeckSelect,
+        SelectCard
     ],
     callbacks: {
         postBoot: () => {
@@ -66,6 +69,11 @@ const config = {
                     // see Poki SDK docs for more details).
                     autoCommercialBreak: true
                 }
+            },
+            {
+                key: 'rexScroller',
+                plugin: ScrollerPlugin,
+                start: true
             }
         ]
     }

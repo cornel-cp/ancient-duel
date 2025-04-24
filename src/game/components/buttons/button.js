@@ -52,7 +52,7 @@ export class Button extends Phaser.GameObjects.Sprite {
 
 
     destroy(fromScene) {
-        this.scene.scale.off('resize', this.resizeCallback);
+        this.removeAllListeners();
         super.destroy(fromScene);
     }
 }

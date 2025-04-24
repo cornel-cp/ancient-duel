@@ -56,7 +56,7 @@ export default class DeckSelect extends BaseScene {
             }
         });
         this.btnStart = new MenuButton(this, this.scale.width - (this.scale.width > 1024 ? 200 : 100), this.scale.height - 60, 'Start', () => {
-            console.log('Help clicked');
+            this.scene.start('SelectCard');
         }).setScale(0.4);
         super.create()
     }
