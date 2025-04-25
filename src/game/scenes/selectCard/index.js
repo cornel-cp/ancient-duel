@@ -100,22 +100,16 @@ export class SelectCard extends BaseScene {
         // const padding = 10;
         // let index = 0;
 
-
-        const gameCards = []
-
-
-
-
         const gridPadding = 100;  // Left + right = 200 total
         const gridGap = 20;
         const gridWidth = screenWidth - gridPadding * 2;
 
         const totalGap = (colCount - 1) * gridGap;
         const cardWidth = (gridWidth - totalGap) / colCount;
-        const cardHeight = cardWidth * 4 / 3;
+        const cardHeight = cardWidth * 3 / 2;
 
 
-        const gridContainer = this.add.container(0, 0); // Positioned with some top margin
+        const gridContainer = this.add.container(0, 100); // Positioned with some top margin
 
         const totalRows = Math.ceil(this.cards.length / colCount);
         const totalHeight = totalRows * cardHeight + (totalRows - 1) * gridGap;
@@ -136,20 +130,26 @@ export class SelectCard extends BaseScene {
         }
         // var txt = this.add.text(leftX, topY, s);
         gridContainer.setMask(bg.createGeometryMask());
-        console.log(totalHeight)
+        const bounds = gridContainer.getBounds();
+        console.log("Grid width:", bounds.width);
+        console.log("Grid height:", bounds.height);
+        // const containeBg = this.add.graphics();
+        // containeBg.fillStyle(0xFF2244, 0.5); // (color, alpha)
+        // containeBg.fillRect(0, 0, bounds.width, bounds.heigh); 
+        // gridContainer.addAt(bg, 0);
+        console.log(gridContainer.x, gridContainer.y, gridContainer.width, gridContainer.height);
 
-        const scrollAreaHeight = h - 2 * topPadding;
-        const contentHeight = totalHeight;
-        const topBound = 0;
-        const bottomBound = Math.min(scrollAreaHeight - contentHeight, 0);
+        const scrollAreaHeight = h;
+        const contentHeight = bounds.height;
+        const bottomBound = Math.min(scrollAreaHeight - contentHeight - topPadding, 0);
 
-        
+
         this.scroller = this.plugins.get('rexScroller').add(bg, {
             bounds: [
                 bottomBound,
-                topBound
+                topPadding
             ],
-            value: topBound,
+            value: topPadding,
             slidingDeceleration: slidingDeceleration,
             backDeceleration: backDeceleration,
             snapStep: snapStep,
