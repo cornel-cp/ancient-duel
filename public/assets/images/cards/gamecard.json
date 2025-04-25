@@ -1,5 +1,5 @@
 { "frames": {
-   "0": {
+   "red": {
     "frame": { "x": 0, "y": 0, "w": 400, "h": 600 },
     "rotated": false,
     "trimmed": false,
@@ -7,7 +7,7 @@
     "sourceSize": { "w": 400, "h": 600 },
     "duration": 100
    },
-   "1": {
+   "purple": {
     "frame": { "x": 400, "y": 0, "w": 400, "h": 600 },
     "rotated": false,
     "trimmed": false,
@@ -15,7 +15,7 @@
     "sourceSize": { "w": 400, "h": 600 },
     "duration": 100
    },
-   "2": {
+   "blue": {
     "frame": { "x": 800, "y": 0, "w": 400, "h": 600 },
     "rotated": false,
     "trimmed": false,
@@ -23,7 +23,7 @@
     "sourceSize": { "w": 400, "h": 600 },
     "duration": 100
    },
-   "3": {
+   "green": {
     "frame": { "x": 0, "y": 600, "w": 400, "h": 600 },
     "rotated": false,
     "trimmed": false,
@@ -31,7 +31,7 @@
     "sourceSize": { "w": 400, "h": 600 },
     "duration": 100
    },
-   "4": {
+   "gray": {
     "frame": { "x": 400, "y": 600, "w": 400, "h": 600 },
     "rotated": false,
     "trimmed": false,

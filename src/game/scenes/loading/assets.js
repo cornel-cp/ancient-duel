@@ -30,9 +30,53 @@ export const DECKS = [
                 url: "greece_general.png"
             },
             {
-                key: "greecedeck_title",
-                url: "greecedeck_title.png"
-            }
+                key: "falangita-macedonio",
+                url: "falangita-macedonio.png"
+            },
+            {
+                key: "guerrenro-espartano",
+                url: "guerrenro-espartano.png"
+            },
+            {
+                key: "hoplita-ateniense",
+                url: "hoplita-ateniense.png"
+            },
+            {
+                key: "hoplita-espartano",
+                url: "hoplita-espartano.png"
+            },
+            {
+                key: "hoplita-macedonio",
+                url: "hoplita-macedonio.png"
+            },
+            {
+                key: "hoplita-platea",
+                url: "hoplita-platea.png"
+            },
+            {
+                key: "hoplita-tebano",
+                url: "hoplita-tebano.png"
+            },
+            {
+                key: "hoplita-tespio",
+                url: "hoplita-tespio.png"
+            },
+            {
+                key: "marino-ateniense",
+                url: "marino-ateniense.png"
+            },
+            {
+                key: "marino-sikyonio",
+                url: "marino-sikyonio.png"
+            },
+            {
+                key: "oficial-ateniense",
+                url: "oficial-ateniense.png"
+            },
+            {
+                key: "oficial-espartano",
+                url: "oficial-espartano.png"
+            },
         ]
     }
 ]
@@ -50,6 +94,12 @@ export const ASEPRITE = [
         image: "button.png",
         json: "button.json"
     },
+    {
+        path: "cards",
+        name: "gamecard",
+        image: "gamecard.png",
+        json: "gamecard.json"
+    },
 ]
 
 export const ASSETS = [
@@ -62,5 +112,5 @@ export const ASSETS = [
         path: "ui/selectdeck",
         name: "select:background",
         image: "background.jpg",
-    }
+    },
 ]

@@ -1,4 +1,5 @@
 import { getCards } from "../../../api";
+import { GameCard } from "../../components/card/gamecard";
 import { BaseScene } from "../base";
 
 const slidingDeceleration = 5000;
@@ -55,17 +56,32 @@ export class SelectCard extends BaseScene {
         //     }
         // });
 
+        let screenWidth = this.scale.width;
+        let colCount = 4;
+        let topPadding = 40;
+
+        if (screenWidth > 1600) {
+            colCount = 10;
+            topPadding = 100;
+        } else if (screenWidth > 1366) {
+            colCount = 8;
+            topPadding = 100
+        } else if (screenWidth > 1024) {
+            colCount = 6;
+            topPadding = 100;
+        }
+
         var snapStep = 75;
         var x = 400,
-            y = 300,
+            y = topPadding,
             w = this.scale.width - 200,
-            h = this.scale.height - 400;
+            h = this.scale.height;
         var topY = y - (h / 2),
             leftX = (w / 2);
         var bg = this.add.graphics()
-            .setPosition(100)
+            .setPosition(100, topPadding)
             .fillStyle(0x00003300, 0.3)
-            .fillRect(0, 0, w, h)
+            .fillRect(0, 0, w, h - 2 * topPadding)
             .setInteractive(new Phaser.Geom.Rectangle(0, 0, w, h),
                 Phaser.Geom.Rectangle.Contains);
 
@@ -88,16 +104,7 @@ export class SelectCard extends BaseScene {
         const gameCards = []
 
 
-        let screenWidth = this.scale.width;
-        let colCount = 4;
 
-        if (screenWidth > 1600) {
-            colCount = 10;
-        } else if (screenWidth > 1366) {
-            colCount = 8;
-        } else if (screenWidth > 1024) {
-            colCount = 6;
-        }
 
         const gridPadding = 100;  // Left + right = 200 total
         const gridGap = 20;
@@ -109,7 +116,7 @@ export class SelectCard extends BaseScene {
 
 
         const gridContainer = this.add.container(0, 0); // Positioned with some top margin
-        
+
         const totalRows = Math.ceil(this.cards.length / colCount);
         const totalHeight = totalRows * cardHeight + (totalRows - 1) * gridGap;
         for (let i = 0; i < this.cards.length; i++) {
@@ -117,11 +124,13 @@ export class SelectCard extends BaseScene {
             const col = i % colCount;
 
             const x = gridPadding + col * (cardWidth + gridGap);
-            const y = row * (cardHeight + gridGap) + 100;
-
-            const card = this.add.image(0, 0, 'greecedeck');
-            card.setOrigin(0, 0)
-            card.setDisplaySize(cardWidth, cardHeight);
+            const y = row * (cardHeight + gridGap);
+            const baseCardWidth = 400; // use your design base
+            const scale = cardWidth / baseCardWidth;
+            const card = new GameCard(this, 0, 0, this.cards[i]);
+            // card.setOrigin(0, 0)
+            card.setScale(scale)
+            // card.setDisplaySize(cardWidth, cardHeight);
             card.setPosition(x, y); // Set position within container
             gridContainer.add(card);
         }
@@ -129,15 +138,12 @@ export class SelectCard extends BaseScene {
         gridContainer.setMask(bg.createGeometryMask());
         console.log(totalHeight)
 
-        var topBound = topY,
-            bottomBound;
-        var contentHieght = totalHeight + 100;
-        if (contentHieght > h) {
-            // over a page
-            bottomBound = topY - contentHieght + h;
-        } else {
-            bottomBound = topY;
-        }
+        const scrollAreaHeight = h - 2 * topPadding;
+        const contentHeight = totalHeight;
+        const topBound = 0;
+        const bottomBound = Math.min(scrollAreaHeight - contentHeight, 0);
+
+        
         this.scroller = this.plugins.get('rexScroller').add(bg, {
             bounds: [
                 bottomBound,

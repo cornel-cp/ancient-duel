@@ -45,6 +45,7 @@ export const getCards = () => {
     return [
         {
             name: "Legionary",
+            texture:"hoplita-espartano",
             deck: "Roman Army",
             description: "Standard heavy Roman foot soldier",
             symbol: "RO",
@@ -55,6 +56,7 @@ export const getCards = () => {
         },
         {
             name: "Centurion",
+            texture:"hoplita-espartano",
             deck: "Roman Army",
             description: "Elite leader, boosts nearby troops",
             symbol: "RO",
@@ -65,6 +67,7 @@ export const getCards = () => {
         },
         {
             name: "Praetorian Guard",
+            texture:"hoplita-espartano",
             deck: "Roman Army",
             description: "Emperor’s guard, heavily armored",
             symbol: "RO",
@@ -75,6 +78,7 @@ export const getCards = () => {
         },
         {
             name: "Gladiator",
+            texture:"hoplita-espartano",
             deck: "Roman Army",
             description: "	Agile but unpredictable fighter",
             symbol: "RO",
@@ -85,6 +89,7 @@ export const getCards = () => {
         },
         {
             name: "Auxilia Infantry",
+            texture:"hoplita-espartano",
             deck: "Roman Army",
             description: "Non-citizen soldiers, light infantry",
             symbol: "RO",
@@ -95,6 +100,7 @@ export const getCards = () => {
         },
         {
             name: "Archer",
+            texture:"hoplita-espartano",
             deck: "Roman Army",
             description: "Light, mobile archer unit",
             symbol: "RO",
@@ -105,6 +111,7 @@ export const getCards = () => {
         },
         {
             name: "Balista",
+            texture:"hoplita-espartano",
             deck: "Roman Army",
             description: "Large bolt-throwing siege engine",
             symbol: "RO",
@@ -115,6 +122,7 @@ export const getCards = () => {
         },
         {
             name: "Slingers",
+            texture:"hoplita-espartano",
             deck: "Roman Army",
             description: "Light troops with slings",
             symbol: "RO",
@@ -125,6 +133,7 @@ export const getCards = () => {
         },
         {
             name: "Legionary",
+            texture:"hoplita-espartano",
             deck: "Roman Army",
             description: "Standard heavy Roman foot soldier",
             symbol: "RO",
@@ -135,6 +144,7 @@ export const getCards = () => {
         },
         {
             name: "Centurion",
+            texture:"hoplita-espartano",
             deck: "Roman Army",
             description: "Elite leader, boosts nearby troops",
             symbol: "RO",
@@ -145,6 +155,7 @@ export const getCards = () => {
         },
         {
             name: "Praetorian Guard",
+            texture:"hoplita-espartano",
             deck: "Roman Army",
             description: "Emperor’s guard, heavily armored",
             symbol: "RO",
@@ -155,6 +166,7 @@ export const getCards = () => {
         },
         {
             name: "Gladiator",
+            texture:"hoplita-espartano",
             deck: "Roman Army",
             description: "	Agile but unpredictable fighter",
             symbol: "RO",
@@ -165,6 +177,7 @@ export const getCards = () => {
         },
         {
             name: "Auxilia Infantry",
+            texture:"hoplita-espartano",
             deck: "Roman Army",
             description: "Non-citizen soldiers, light infantry",
             symbol: "RO",
@@ -175,6 +188,7 @@ export const getCards = () => {
         },
         {
             name: "Archer",
+            texture:"hoplita-espartano",
             deck: "Roman Army",
             description: "Light, mobile archer unit",
             symbol: "RO",
@@ -185,6 +199,7 @@ export const getCards = () => {
         },
         {
             name: "Balista",
+            texture:"hoplita-espartano",
             deck: "Roman Army",
             description: "Large bolt-throwing siege engine",
             symbol: "RO",
@@ -195,6 +210,7 @@ export const getCards = () => {
         },
         {
             name: "Slingers",
+            texture:"hoplita-espartano",
             deck: "Roman Army",
             description: "Light troops with slings",
             symbol: "RO",
