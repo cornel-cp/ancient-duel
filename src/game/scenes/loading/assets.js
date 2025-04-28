@@ -77,6 +77,10 @@ export const DECKS = [
                 key: "oficial-espartano",
                 url: "oficial-espartano.png"
             },
+            {
+                key: "hippeis",
+                url: "hippeis.png"
+            },
         ]
     }
 ]

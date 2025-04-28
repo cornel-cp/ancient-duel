@@ -4,11 +4,18 @@ export class BaseScene extends Scene {
 
     centerContainer
     config
+    currentScene
 
     constructor(config) {
         super(config.name);
         this.config = config
     }
+
+    
+  init(config) {
+    this.currentScene = config.key
+    console.log('BaseScene init', this.scene.key);
+  }
 
     create() {
         const { width, height } = this.scale;
@@ -33,4 +40,6 @@ export class BaseScene extends Scene {
         if (this.centerContainer)
             this.centerContainer.setPosition(width / 2, height / 2 - 150);
     }
+
+
 }

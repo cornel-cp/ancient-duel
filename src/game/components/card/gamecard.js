@@ -40,7 +40,7 @@ export class GameCard extends Phaser.GameObjects.Container {
         }).setOrigin(0.5, 0);
 
         // === Attack Value ===
-        this.attackValue = scene.add.text(0, 0, card.poitn?.toString() || '0', {
+        this.attackValue = scene.add.text(0, 0, card.point?.toString() || '0', {
             fontSize: '48px',
             fontFamily: 'Georgia',
             color: '#f8e36a',
@@ -48,6 +48,12 @@ export class GameCard extends Phaser.GameObjects.Container {
             backgroundColor: '#00000055',
             padding: { x: 8, y: 4 }
         }).setOrigin(1, 1); // bottom-right
+        const paddingRight = this.plane.width * 0.05; // 5% of card width
+        const paddingBottom = this.plane.height * 0.03; // 3% of card height
+        this.attackValue.setPosition(
+            this.plane.width - paddingRight,
+            this.plane.height - paddingBottom
+        );
 
         // Add everything
         this.add([
